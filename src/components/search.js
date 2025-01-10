@@ -27,6 +27,10 @@ AFRAME.registerComponent('search', {
     this.queryObject = { hitsPerPage: 0, query: '' };
     this.el.sceneEl.addEventListener('searchclear', () => {
       this.search('');
+      this.el.sceneEl.emit('pausegame', null, false);
+      this.el.emit('pausegame', null, false);
+      this.el.sceneEl.emit('recenter', null, false);
+      this.el.emit('recenter', null, false);
     });
   },
 

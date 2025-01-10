@@ -39,6 +39,7 @@ AFRAME.registerComponent('recenter', {
     return function () {
       const el = this.el;
       this.el.sceneEl.emit('pausegame', null, false);
+      this.el.emit('pausegame', null, false);
       if (!this.data.enabled) { return; }
 
       console.log("recentered");
