@@ -30,6 +30,8 @@ AFRAME.registerComponent('recenter', {
 
       if (!this.data.enabled) { return; }
 
+      console.log("recentered");
+
       const camera = el.sceneEl.camera.el.object3D;
 
       // Reset matrix.
