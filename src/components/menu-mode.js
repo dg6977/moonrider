@@ -32,15 +32,22 @@ AFRAME.registerComponent('menu-mode', {
         localStorage.setItem('gameMode', name);
       }
       this.setModeOption(name);
+      this.recenter()
+    });
+
+    this.el.addEventListener("recenter", evt => {
+      this.recenter()
     });
   },
 
   update: function () {
     if (this.data.hasVR) {
       this.setModeOption(localStorage.getItem('gameMode') || 'punchvr');
+      this.recenter()
       this.el.sceneEl.emit('gamemode', modeMap[localStorage.getItem('gameMode') || 'punchvr']);
     } else {
       this.setModeOption('ride2d');
+      this.recenter()
     }
   },
 
@@ -82,5 +89,44 @@ AFRAME.registerComponent('menu-mode', {
 
     this.el.sceneEl.emit('recenter', null, false);
     this.el.emit('recenter', null, false);
+  },
+
+  recenter: function () {
+    var euler = new THREE.Euler();
+    var matrix = new THREE.Matrix4();
+    var rotationMatrix = new THREE.Matrix4();
+    var translationMatrix = new THREE.Matrix4();
+    console.log("dongkun/recenter called")
+
+    // return function () {
+      const el = this.el;
+      // this.el.sceneEl.emit('pausegame', null, false);
+      // this.el.emit('pausegame', null, false);
+      // if (!this.data.enabled) { return; }
+
+      // console.log("recentered");
+
+      const camera = el.sceneEl.camera.el.object3D;
+
+      // Reset matrix.
+      matrix.identity();
+
+      // Create matrix to reset Y rotation.
+      euler.set(0, -1 * camera.rotation.y, 0);
+      rotationMatrix.makeRotationFromEuler(euler);
+
+      // Create matrix to zero position.
+      translationMatrix.makeTranslation(-1 * camera.position.x, 0, -1 * camera.position.z);
+
+      // camera.applyMatrix(0,0,0);
+
+      // Multiply and decompose back to object3D.
+      matrix.multiply(rotationMatrix).multiply(translationMatrix);
+      matrix.decompose(el.object3D.position, el.object3D.quaternion, el.object3D.scale);
+      el.object3D.updateMatrixWorld(true);
+      // el.object3D.applyMatrix(matrix)
+
+      el.emit('recentered', null, false);
+    // };
   }
 });

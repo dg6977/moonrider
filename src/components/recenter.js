@@ -56,11 +56,15 @@ AFRAME.registerComponent('recenter', {
       // Create matrix to zero position.
       translationMatrix.makeTranslation(-1 * camera.position.x, 0, -1 * camera.position.z);
 
+      // camera.applyMatrix(0,0,0);
+
       // Multiply and decompose back to object3D.
       matrix.multiply(rotationMatrix).multiply(translationMatrix);
       matrix.decompose(el.object3D.position, el.object3D.quaternion, el.object3D.scale);
       el.object3D.updateMatrixWorld(true);
-      el.object3D.applyMatrix(matrix)
+      // el.object3D.applyMatrix(matrix)
+
+      console.log("recenter called")
       el.emit('recentered', null, false);
     };
   })()
