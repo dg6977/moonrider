@@ -73,7 +73,7 @@ AFRAME.registerComponent('menu-mode', {
         'text', 'color',
         selected ? COLORS.WHITE : COLORS.schemes[this.data.colorScheme].primary);
     }
-
+    console.log("dongkun/menu clicked");
     this.el.addEventListener('thumbstickdown', this.recenter);
     this.el.addEventListener('trackpaddown', this.recenter);
     
