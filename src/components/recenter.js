@@ -17,6 +17,17 @@ AFRAME.registerComponent('recenter', {
 
     this.el.addEventListener('recenter', this.recenter);
     this.el.addEventListener('menudown', this.recenter);
+    this.el.addEventListener('thumbstickdown', this.recenter);
+
+    this.el.sceneEl.addEventListener('controllerconnected', evt => {
+      if (evt.detail.name === 'vive-controls') {
+        this.el.addEventListener('menudown', this.pauseGame);
+      } else {
+        this.el.addEventListener('thumbstickdown', this.recenter);
+        this.el.addEventListener('trackpaddown', this.recenter);
+      }
+    });
+
   },
 
   recenter: (function () {
