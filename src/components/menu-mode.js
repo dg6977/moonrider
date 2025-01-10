@@ -73,5 +73,14 @@ AFRAME.registerComponent('menu-mode', {
         'text', 'color',
         selected ? COLORS.WHITE : COLORS.schemes[this.data.colorScheme].primary);
     }
+
+    this.el.addEventListener('thumbstickdown', this.recenter);
+    this.el.addEventListener('trackpaddown', this.recenter);
+    
+    this.el.sceneEl.emit('pausegame', null, false);
+    this.el.emit('pausegame', null, false);
+
+    this.el.sceneEl.emit('recenter', null, false);
+    this.el.emit('recenter', null, false);
   }
 });
