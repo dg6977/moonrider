@@ -106,7 +106,7 @@ AFRAME.registerComponent('menu-mode', {
       // console.log("recentered");
 
       const camera = el.sceneEl.camera.el.object3D;
-      console.log("dongkun/camera pose/" + el.sceneEl.camera.el.object3D)
+      console.log("dongkun/camera pose/" + "x: " + camera.position.x + "y: "+ camera.position.y + "z: " + camera.position.z)
 
       // Reset matrix.
       matrix.identity();
