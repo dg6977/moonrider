@@ -38,11 +38,12 @@ AFRAME.registerComponent('recenter', {
 
     return function () {
       const el = this.el;
-      this.el.sceneEl.emit('pausegame', null, false);
-      this.el.emit('pausegame', null, false);
+      // this.el.sceneEl.emit('pausegame', null, false);
+      // this.el.emit('pausegame', null, false);
+      console.log("dongkun/recenter called");
+
       if (!this.data.enabled) { return; }
 
-      console.log("recentered");
 
       const camera = el.sceneEl.camera.el.object3D;
 
@@ -64,7 +65,7 @@ AFRAME.registerComponent('recenter', {
       el.object3D.updateMatrixWorld(true);
       // el.object3D.applyMatrix(matrix)
 
-      console.log("recenter called")
+      console.log("dongkun/recenter succeed");
       el.emit('recentered', null, false);
     };
   })()
