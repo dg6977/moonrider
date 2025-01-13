@@ -97,7 +97,7 @@ AFRAME.registerComponent('menu-mode', {
     var rotationMatrix = new THREE.Matrix4();
     var translationMatrix = new THREE.Matrix4();
     console.log("dongkun/recenter called")
-
+    console.log("dongkun/camera pose/" + el.sceneEl.camera.el.object3D)
     // return function () {
       const el = this.el;
       // this.el.sceneEl.emit('pausegame', null, false);
